@@ -20,18 +20,12 @@ app.use(cookieParser());
 // Create a new Counter instance, like: `var voteCounter = new Counter()`
 var voteCounter = new Counter();
 
-// Respond to 'get' requests for the route '/kittens'
-// - Record a vote for 'kittens'
-// - Retrieve the new cumulative votes for 'kittens'
-// - Respond with with the message:
-//     "Thank you for voting! Kittens have 12 total votes so far."
+// Respond to 'post' requests for the route '/kittens'
 app.post('/kittens', function(req, res){
     
     // If user has cookie, bring up already voted page
     if (req.cookies.remember) {
-        res.render('repeat', {
-            animal: 'kittens'
-        });
+        res.render('repeat', {});
     }
     
     else {
@@ -46,18 +40,12 @@ app.post('/kittens', function(req, res){
     }
 });
 
-// Respond to 'get' requests for the route '/puppies'
-// - Record a vote for 'puppies'
-// - Retrieve the new cumulative votes for 'puppies'
-// - Respond with with the message:
-//     "Thank you for voting! Puppies have 12 total votes so far."
+// Respond to 'post' requests for the route '/puppies'
 app.post('/puppies', function(req, res){
     
     // If user has cookie, bring up already voted page
     if (req.cookies.remember) {
-        res.render('repeat', {
-            animal: 'puppies'
-        });
+        res.render('repeat', {});
     }
     
     else {
