@@ -17,4 +17,10 @@ Counter.prototype.results = function() {
     return this.data;
 };
 
+// .load(obj) - Load file contents into object
+Counter.prototype.load = function(obj) {
+    if(obj != null || obj != undefined)
+        this.data = obj;
+};
+
 module.exports = Counter;
