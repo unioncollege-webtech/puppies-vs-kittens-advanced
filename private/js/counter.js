@@ -1,7 +1,7 @@
 // Create a Counter class that will be used to create counter objects
 // See the full description in README.md
 // Counter constructor definition
-module.exports = function Counter() {
+var Counter = function() {
   this.store = {
     kittens: 0,
     puppies: 0
