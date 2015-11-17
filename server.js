@@ -12,8 +12,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 
 app.use(express.static('public'));
-
-var voteCounter = require("./Counter");
+var Counter = require("./Counter");
+var voteCounter = new Counter();
 
 app.get('/', function(req, res){
     res.render('index',{title:"Puppies vs. Kittens", head:"Puppies vs. Kittens", image:"https://i.ytimg.com/vi/gU2ZPcS-bAk/maxresdefault.jpg"}); 
