@@ -1,31 +1,38 @@
-// Require the Express module (https://npmjs.com/package/express)
+var express = require('express');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser')
+
+var app = express();
+
+app.use(cookieParser())
+
+app.set('view engine', 'hbs');
+
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: true })); 
+
+app.use(express.static('public'));
+var Counter = require("./Counter");
+var voteCounter = new Counter();
+
+app.get('/', function(req, res){
+    res.render('index',{title:"Puppies vs. Kittens", head:"Puppies vs. Kittens", image:"https://i.ytimg.com/vi/gU2ZPcS-bAk/maxresdefault.jpg"}); 
+});
 
 
-// Create a new express application instance by calling `express()`
+app.post('/vote', function(req, res){
+    if(req.cookies.voted){
+        res.send("No more voting for you!");
+    }
+    else
+    {
+        res.cookie('voted', 1);
+        var animal = req.body.animal;
+        voteCounter.record(animal);
+        var image = animal == "Kittens" ? "http://vignette3.wikia.nocookie.net/wikiality/images/3/31/Happy_kity.jpg/revision/latest?cb=20061216202527" : "https://pbs.twimg.com/profile_images/497043545505947648/ESngUXG0.jpeg";
+        res.render('vote',{title:"Vote",animal: animal, animalVotes: voteCounter.retrieve(animal), head:"The Results are in!", image:image});
+    }
+});
 
-
-// Serve files in the 'public' directory with Express's built-in static file server
-
-
-// Create a Counter class that will be used to create counter objects
-// See the full description in README.md
-// .
-
-// Create a new Counter instance, like: `var counter = new Counter()`
-
-
-// Respond to 'get' requests for the route '/kittens'
-// - Record a vote for 'kittens'
-// - Retrieve the new cumulative votes for 'kittens'
-// - Respond with with the message:
-//     "Thank you for voting! Kittens have 12 total votes so far."
-
-
-// Respond to 'get' requests for the route '/puppies'
-// - Record a vote for 'puppies'
-// - Retrieve the new cumulative votes for 'puppies'
-// - Respond with with the message:
-//     "Thank you for voting! Puppies have 12 total votes so far."
-
-
-// Listen on port 8080 for Cloud9
+// Have the Express application listen for incoming requests on port 8080
+app.listen(8080);
