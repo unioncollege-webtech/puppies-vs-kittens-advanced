@@ -1,0 +1,12 @@
+<div class='voteButtonWrap'>
+  <form method='post' action='/vote'>
+    <input type='radio' name='animal' value='kittens' checked>Kittens!</input>
+    <input type='radio' name='animal' value='puppies'>Puppies!</input>
+    <br><br>
+    <button type='submit'>Vote</button>
+  </form>
+</div>
+
+<h2>Current Votes</h2>
+<p>Kittens: {{votes.kittens}}</p>
+<p>Puppies: {{votes.puppies}}</p>

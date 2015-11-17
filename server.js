@@ -1,11 +1,21 @@
 // Require the Express module (https://npmjs.com/package/express)
 var express = require('express');
+var hbs = require('hbs');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+//var voteCounter = require('./private/js/counter.js');
 
 // Create a new express application instance by calling `express()`
 var app = express();
 
 // Serve files in the 'public' directory with Express's built-in static file server
 app.use(express.static('public'));
+app.set('view engine', 'hbs');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(cookieParser());
+
+cookieParser('This is a supery dupery secret cookie signerthingm"abob string that is not guessable easilyd.');
 
 // Create a Counter class that will be used to create counter objects
 // See the full description in README.md
@@ -33,20 +43,28 @@ Counter.prototype.results = function() {
   return this.store;
 };
 
-// Create a new counter instance
 var voteCounter = new Counter();
 
-// Respond to 'get' requests for the route '/kittens'
-app.get('/kittens', function(req, res){
-  voteCounter.record('kittens');
-  res.send('Thank you for voting! Kittens have ' + voteCounter.retrieve('kittens') + ' total votes so far!');
-})
+app.get('/', function(req, res){
+  res.render('index', {
+    title: 'Puppies vs. Kittens',
+    votes: voteCounter.results()
+  });
+//  console.log(req.cookies);
+});
 
-// Respond to 'get' requests for the route '/puppies'
-app.get('/puppies', function(req, res){
-  voteCounter.record('puppies');
-  res.send('Thank you for voting! Puppies have ' + voteCounter.retrieve('puppies') + ' total votes so far!');
-})
+// Respond to 'post' requests for the route '/vote'
+app.post('/vote', function(req, res){
+  voteCounter.record(req.body.animal);
+  console.log(req.body);
+  res.redirect('/');
+/*  res.render('voted', {
+    title: 'Puppies vs. Kittens',
+    animal: 'kittens',
+    votes: voteCounter.retrieve('kittens')
+  }); */
+});
 
 // Have the Express application listen for incoming requests on port 8080
+console.log('[kvsp] app listening at 8080');
 app.listen(8080);
