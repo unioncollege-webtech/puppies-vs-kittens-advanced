@@ -1,0 +1,13 @@
+<p>Cast your vote for the superior pet: Puppies or Kittens:</p>
+
+<form method='post' action='/vote'>
+    <input type='radio' name='animal' value='puppies'>Puppies</input>
+    <input type='radio' name='animal' value='kittens'>Kittens</input><br>
+    <br>
+    <button type='submit'>Vote</button>
+</form>
+
+<h2>Current Votes:</h2>
+
+<p>Puppies: {{votes.puppies}}</p>
+<p>Kittens: {{votes.kittens}}</p>
