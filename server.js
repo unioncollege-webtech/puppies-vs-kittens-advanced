@@ -27,6 +27,9 @@ app.use(cookieParser());
 
 cookieParser('This is a supery dupery secret cookie signerthingm"abob string that is not guessable easilyd.');
 
+voteCounter.make('kittens');
+voteCounter.make('puppies');
+
 app.get('/', function(req, res){
   // Denies voting
   if(req.cookies.animal){
