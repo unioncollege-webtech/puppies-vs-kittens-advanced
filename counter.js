@@ -1,24 +1,25 @@
-
 function Counter() {
-    this.pet = {
-    };
+    this.pet = {};
 }
 
 Counter.prototype.record = function(key) {
-    if(this.pet.hasOwnProperty('kittens')){
+    if (this.pet.hasOwnProperty(key)) {
         this.pet[key]++;
-}  else if (this.pet.hasOwnProperty('puppies')) {
-    this.pet[key]++;
-} else {
-    this.pet[key] = 1
+    } else {
+        this.pet[key] = 1;
+    }
 };
 
 Counter.prototype.retrieve = function(key) {
-   return this.pet[key];
+    if(this.pet.hasOwnProperty(key)) {
+        return this.pet[key];
+    } else {
+        return 0;
+    }
 };
 
-Counter.prototype.results = function(){
+Counter.prototype.results = function() {
     return this.pet;
-    };
 };
 
+module.exports = Counter;
