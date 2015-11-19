@@ -1,0 +1,9 @@
+<form method='post' action='/vote'>
+    <input type="radio" name='animals' value='kittens'>Kittens</input>
+    <input type="radio" name='animals' value='puppies'>Puppies</input>
+    <button type="submit">Vote</button>
+</form>
+
+<h2>Current Votes</h2>
+<p>Kittens: {{votes.kittens}}</p>
+<p>Puppies: {{votes.puppies}}</p>
