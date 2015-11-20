@@ -1,0 +1,37 @@
+button {
+  color: black;
+  font-weight: bold;
+  text-transform: UPPERCASE;
+  font-size: 85%;
+}
+.button:hover{
+    color: white;
+    background-color: black;
+    font-size:85%;
+}
+#radio-input {
+    margin: auto;
+    font-weight: bolder;
+}
+#container {
+    margin: auto;
+    text-align: center;
+
+    color: black;
+    max-width: 75%;
+    padding-top: 1px;
+    padding-bottom: 20px;
+    background-image: url('dog-kitten.jpg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-attachment: fixed;
+    background-size: 30%;
+    size: 25%;
+}
+#current-votes{
+    color: white;
+}
+#paragraph{
+    size: 90px;
+    font-weight: bolder;
+}
