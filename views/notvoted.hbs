@@ -1,0 +1,18 @@
+<div id="paragraph">
+    <div id="radio-input">
+        <p>Cast your vote for the superior pet, Puppies or Kittens:</p>
+        
+        <form method='post' action='/vote'>
+            <input type='radio' name='animal' value='puppies'>Puppies</input>
+            <input type='radio' name='animal' value='kittens'>Kittens</input>
+    </div>
+    <br>
+    <button class= "button" type='submit'>Vote</button>
+    </form>
+    <div id="current-votes">
+        <h2>Current Votes:</h2>
+
+        <p>Puppies: {{votes.puppies}}</p>
+        <p>Kittens: {{votes.kittens}}</p>
+    </div>
+</div>
