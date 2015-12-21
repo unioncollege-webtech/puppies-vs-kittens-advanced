@@ -1,0 +1,9 @@
+<h1>{{title}}</h1>
+<p>Cast your vote for the cuter creature: puppies or kittens:</p>
+<form action="/theCounted" method='POST'>
+    <input type='radio' name='pet' value='puppies'>Puppies</input>
+    <input type='radio' name='pet' value='kittens'>Kittens</input>
+    <input type='submit'></input>
+</form>
+<h2>Kittens: {{totalCount.kittens}}</h2>
+<h2>Puppies: {{totalCount.puppies}}</h2>
