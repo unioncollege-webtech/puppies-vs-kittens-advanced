@@ -12,6 +12,17 @@
     <p>Cast your vote for the cuter creature: puppies or kittens:</p>
     <p>
         <!-- Include a form to submit votes here -->
+        <form method="POST" action="/vote">
+            <label><input type="text" name="name">Enter your name:</label>
+            <label><input type="radio" name="selection" value="Kittens">Kittens</label>
+            <label><input type="radio" name="selection" value="Puppies">Puppies</label>
+            <button type="submit">Vote</button>
+        </form>
+        <!--<form method="POST" action="/puppies">-->
+        <!--    <button type="submit">Vote for Puppies</button>-->
+        <!--</form>-->
+        <!--<a href=/kittens>Kittens</a>-->
+        <!--<a href=/puppies>Puppies</a>-->
     </p>
 </body>
 
