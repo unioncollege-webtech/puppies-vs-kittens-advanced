@@ -1,70 +1,118 @@
 Puppies Versus Kittens
 ======================
 
-[![Join the chat at https://gitter.im/unioncollege-webtech/puppies-vs-kittens-advanced](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/unioncollege-webtech/puppies-vs-kittens-advanced?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+### Get a REDIS server running before running the server
 
-Improve the [Puppies Versus Kittens][previous] website by using cookies, `POST`
-requests, and templates.
+[![Join the chat at https://gitter.im/unioncollege-webtech/puppies-vs-kittens](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/unioncollege-webtech/puppies-vs-kittens?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[previous]: https://github.com/unioncollege-webtech/puppies-vs-kittens
+Create an Express application to judge who is cuter: puppies or kittens.
 
 Description
 -----------
 
-In the previous exercise, we built a website that allowed visitors to vote on 
-which is cuter: puppies or kittens. The website will consisted of a static
-index.html file and two dynamic routes to record votes for puppies and kittens.
-Additionally, we defined a new [class][classes] called `Counter` and used it
-to record the votes.
+In this exercise we will build a website that will allow visitors to vote on
+which is cuter: puppies or kittens. The website will consist of one static
+index.html file and two dynamic routes: one to record votes for puppies, the
+other to record votes for kittens. Additionally, we will define a new [class][classes]
+called `Counter` and use it to record the votes.
 
-In this exercise, we will begin where we left off and improve on our application
-considerably.
+### Create an Express application
 
-There are several problems with our website:
+Since the website will have a mix of [static] and [dynamic] content, we will use
+Express to build our application.
 
-* Using ‘GET’ requests for something like this is very bad. 
-[According to the specification](https://tools.ietf.org/html/rfc7231#section-4.2.1),
-`GET` requests are expected to be "safe", meaning that they are essentially 
-read-only, and do not have a side-effecton the server. This is currently not the
-case with our website, as each consecutive visit will increase the recorded 
-counter.
+Currently [server.js](./server.js) has an outline of the steps necessary to
+serve static files and respond to the `get` requests to `/kittens` and
+`/puppies`. Use the [Express API documentation][Express] (specifically, the pages
+linked to in the [References](#references) section below) to build out the
+required pieces. Feel free to use the [Express Static Server] repository as a
+starting point as well.
 
-* The user can vote multiple times; we currently have no way of keeping track of
-who is voting.
+## Create the `Counter` function
 
-* The message shown after voting is plain and ugly. It would be better to show
-the user a styled web page and a helpful message, and display the results of
-the poll so far.
+In this exercise we are also experimenting with
+[creating classes in JavaScript][classes]. JavaScript doesn't have traditional
+classes like a typical object oriented programming language. Instead, JavaScript
+uses functions as constructors for classes, and we use the `new` operator to
+construct objects from those functions. Instance methods are created by
+adding functions to the `.prototype` property of the constructor function.
 
-* The `Counter` function is out of place in `server.js`. It would be better to
-move it to its own file and use `require` to load it.
+> Reference note: the Mozilla Developer Network’s
+[Introduction to Object-Oriented JavaScript][classes] is an excellent
+description of JavaScript’s approach to object-oriented programming.
 
-In this exercise we will build on our previous website and solve each of the
-problems listed above.
+We will be defining a new class called `Counter` to record the votes for puppies
+and kittens. We'll create a new counter instance, then call `counter.record('puppies')`
+to record a vote for puppies, and `counter.record('kittens')` to record votes for
+kittens. We'll retrive the accumulated votes by calling
+`counter.retrieve('puppies')`, and `counter.retrieve('kittens')`.
 
-### Use the `POST` method to submit the results
+A starting point for the `Counter` class is below:
 
-TODO (http://expressjs.com/4x/api.html#req.body)
+```js
+// Counter constructor definition
+function Counter() {
+    // Create a property on the `this` reference to store counts for each key
+}
 
-### Use cookies to record that a user has voted
+// .record(key) - increment the count value for `key`
+Counter.prototype.record = function(key) {
 
-TODO (http://expressjs.com/4x/api.html#req.cookies)
+};
 
-### Use templates to render a dynamic response after voting
+// .retrieve(key) - retrieve the total recorded counts for `key`
+Counter.prototype.retrieve = function(key) {
 
-TODO (http://expressjs.com/4x/api.html#res.render, https://github.com/donpark/hbs)
+};
 
-### Move `Counter` to its own file
+// .results() - return an object containing the cumulative counts for all keys
+Counter.prototype.results = function() {
 
-TODO (https://nodejs.org/api/modules.html#modules_modules)
+};
 
+// Create a new counter instance
+var voteCounter = new Counter();
+
+// Record a vote for kittens
+voteCounter.record('kittens');
+// Retrieve the number of votes for kittens
+var kittenVotes = voteCounter.retrieve('kittens');
+// => 1
+```
+
+Once we create the `Counter` class, we will
+[use it inside our route handlers](https://github.com/unioncollege-webtech/puppies-vs-kittens/blob/master/server.js#L18)
+for '/puppies' and '/kittens' to record the votes and retrieve the totals.
+
+
+## Add links to “index.html”
+
+Visitors to the website will be served [`index.html`](./index.html) and will
+cast their votes by clicking on a link for their preferred animal. We need to
+update index.html and add links to "/puppies" and "/kittens" so it looks
+something like this:
+
+> <h1>Puppies vs. Kittens</h1>
+> <p>Cast your vote for the cuter creature: puppies or kittens:</p>
+>
+> <a href="/puppies">Puppies</a> <a href="/kittens">Kittens</a>
+
+When the user clicks on one of those links, they will be sent to `/puppies` or
+`/kittens` on our domain. We will be listening for those requests in `server.js`
+and will send back a message like the following:
+
+> Thank you for voting! Kittens have 12 total votes so far.
+
+## Style the pages
+
+Currently there are no styles for our Puppies Versus Kittens voting website.
+Create a `style.css` file with some lovely styles for this application. Feel
+free to update `index.html` as necessary.
 
 Extra Credit
 ------------
 
-* Currently the recorded votes go away after restarting the server. Use a file
-or database or some other option to persist the results.
-* Use CSS and/or JavaScript to display the results with a bar or pie chart.
+Extra Credit options to come.
 
 Completing and submitting the assignment
 ----------------------------------------
@@ -75,7 +123,7 @@ Completing and submitting the assignment
   - Alternatively, you may [**clone**](http://gitref.org/creating/#clone) your
     new repository to your computer by running:
 
-        git clone https://github.com/YOUR_GITHUB_USERNAME/puppies-vs-kittens-advanced
+        git clone https://github.com/YOUR_GITHUB_USERNAME/puppies-vs-kittens
 
 - After cloning (in Cloud9 or on your computer), install the `express`
   module using `npm` by running:
@@ -93,7 +141,7 @@ Completing and submitting the assignment
 - [Create a pull request](https://help.github.com/articles/creating-a-pull-request) on the original repository to turn in the assignment.
 - [Create a separate branch](http://gitref.org/branching/#branch) for the extra credit options.
 
-You are also welcome commit, push, and create a pull request **before** you’ve 
+You are also welcome commit, push, and create a pull request **before** you’ve
 completed your solution. You can ask questions or request feedback there in your
 pull request. Just mention `@barberboy` in your comments to get my attention.
 
@@ -106,7 +154,6 @@ References
 * [Serving static files with Express][Static]
 * [Defining routes in Express][Dynamic]
 * [Express Static Server] example repository
-* [Express body-parser middleware][body-parser] ([example][body-parser example])
 
 [server.js]: ./server.js
 [classes]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript#Custom_objects
@@ -115,6 +162,3 @@ References
 [Dynamic]: http://expressjs.com/guide/routing.html
 [Express Static Server]: https://github.com/unioncollege-webtech/express-static-server/blob/master/server.js#L3
 [new operator]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new
-[cookie-parser]: https://www.npmjs.com/package/cookie-parser
-[body-parser]: https://www.npmjs.com/package/body-parser
-[body-parser example]: https://github.com/expressjs/body-parser#expressconnect-top-level-generic

@@ -1,0 +1,142 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+html, body {
+  height: 100vh;
+  width: 100vw;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #006348;
+}
+
+main {
+  box-shadow: inset 12px 0 15px -4px #006348, inset -12px 0 8px -4px #006348;
+	-moz-box-shadow: inset 12px 0 15px -4px #006348, inset -12px 0 8px -4px #006348;
+	-webkit-box-shadow: inset 12px 0 15px -4px #006348, inset -12px 0 8px -4px #006348;
+	-o-box-shadow: inset 12px 0 15px -4px #006348, inset -12px 0 8px -4px #006348;
+  background-color: #199976;
+  color: #e4e4e4;
+  padding: 2em;
+  font-family: Verdana;
+  font-size: 14px;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  width: 55%;
+}
+
+#headingStuff {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+#voteBox {
+  display: flex;
+  margin-top: 1em;
+  -webkit-box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.35);
+  -moz-box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.35);
+  box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.35);
+  width: 70%;
+  height: 20%;
+  background-color: #dedede;
+  border: 3px solid #199976;
+  color: #242424;
+  border-radius: 1em;
+  justify-content: space-around;
+  text-align: center;
+  flex-direction: column;
+  padding-bottom: 0.5rem;
+}
+
+#buttonContainer {
+  width: 100%;
+  height: 35%;
+  display: flex;
+  justify-content: space-around;
+  -webkit-touch-callout: none; /* iOS Safari */
+-webkit-user-select: none;   /* Chrome/Safari/Opera */
+-khtml-user-select: none;    /* Konqueror */
+-moz-user-select: none;      /* Firefox */
+-ms-user-select: none;       /* Internet Explorer/Edge */
+user-select: none;
+}
+
+.voteButton {
+  width: 40%;
+  height: 90%;
+  border: 3px solid #dedede;
+  border-radius: 1em;
+  justify-content: center;
+  align-items: center;
+  color: #e4e4e4;
+  font-weight: 600;
+  font-family: Helvetica;
+  font-size: 1.4rem;
+}
+
+#puppiesButton {
+  display: flex;
+  background-color: #EA6D26;
+}
+
+#puppiesButton:hover {
+  background-color: #DFCF27;
+  cursor: pointer;
+}
+
+#kittensButton {
+  display: flex;
+  background-color: #245999;
+}
+
+#kittensButton:hover {
+  background-color: #DFCF27;
+  cursor: pointer;
+}
+
+#options {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  text-align: center;
+}
+
+#responseLimitations {
+  margin-top: 1rem;
+  display: flex;
+  width: 90%;
+  padding: 0.5rem;
+  background-color: #20bd51;
+}
+
+#responseLimitations:hover {
+  background-color: #28e362;
+  cursor: pointer;
+}
+
+.limiting {
+  background-color: #eb2626 !important;
+}
+
+.limiting:hover {
+  background-color: #e35e41 !important;
+}
+
+#canvas-holder {
+  display: flex;
+  width: 90%;
+  margin-bottom: 1rem;
+}
+
+#voteCanvas {
+  width: 100%;
+}
