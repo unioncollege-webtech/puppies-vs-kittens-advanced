@@ -1,0 +1,32 @@
+button {
+  color: black;
+  font-weight: bold;
+  text-transform: UPPERCASE;
+  font-size: 85%;
+}
+.button:hover{
+    color: Green;
+    background-color: black;
+    font-size:85%;
+}
+#radio-input {
+    margin: auto;
+    font-weight: bolder;
+}
+#container {
+    background-color: grey;
+    margin: auto;
+    text-align: center;
+    color: black;
+    max-width: 75%;
+    padding-top: 1px;
+    padding-bottom: 20px;
+}
+#current-votes{
+    color: Black;
+}
+#paragraph{
+    background-color: darkseagreen;
+    size: 100px;
+    font-weight: bolder;
+}
